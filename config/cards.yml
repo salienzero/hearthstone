@@ -1,0 +1,35 @@
+mana_bolt:
+  name: Mana Bolt
+  cost: 1
+  damage: 1
+mana_spear:
+  name: Mana Spear
+  cost: 2
+  damage: 2
+lightning_bolt:
+  name: Lightning Bolt
+  cost: 3
+  damage: 3
+fireball:
+  name: Fireball
+  cost: 4
+  damage: 4
+firestorm:
+  name: Firestorm
+  cost: 5
+  damage: 5
+heal:
+  name: Heal
+  cost: 1
+  heal: 1
+cantrip_bolt:
+  name: Cantrip Bolt
+  cost: 1
+  damage: 1
+  draw: 1
+epic_blow:
+  name: Epic Blow
+  cost: 5
+  damage: 4
+  mana: 1
+  message: You will never defeat me!

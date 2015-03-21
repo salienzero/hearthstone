@@ -1,0 +1,6 @@
+starting_hp: 30
+starting_hand_size: 4
+starting_mana: 1
+mana_per_turn: 1
+max_mana: 10
+empty_deck_hp_loss: 1
