@@ -10,27 +10,10 @@ CARDS = YAML.load_file(File.join(File.dirname(__FILE__), "config", "cards.yml"))
 model_path = File.join(File.dirname(__FILE__), "models", "**", "*.rb")
 Dir.glob(model_path).each { |f| require f }
 
+players = []
+players << Player.new("Player 1", DEFAULT_DECKLIST, GAME_CONFIG["starting_hp"], GAME_CONFIG["starting_hand_size"], GAME_CONFIG["empty_deck_hp_loss"])
+players << Player.new("Player 2", DEFAULT_DECKLIST, GAME_CONFIG["starting_hp"], GAME_CONFIG["starting_hand_size"], GAME_CONFIG["empty_deck_hp_loss"])
 
-player1 = Player.new(DEFAULT_DECKLIST, GAME_CONFIG["starting_hp"], GAME_CONFIG["starting_hand_size"])
-player2 = Player.new(DEFAULT_DECKLIST, GAME_CONFIG["starting_hp"], GAME_CONFIG["starting_hand_size"])
+game = Game.new(players, GAME_CONFIG["starting_mana"], GAME_CONFIG["mana_per_turn"], GAME_CONFIG["max_mana"])
 
-puts "p1 deck:"
-player1.deck.cards.each do |card|
-  puts card.name
-end
-
-puts "p1 hand:"
-player1.hand.each do |card|
-  puts card.name
-end
-
-puts "p2 deck:"
-player2.deck.cards.each do |card|
-  puts card.name
-end
-
-puts "p2 hand:"
-player2.hand.each do |card|
-  puts card.name
-end
-
+game.run_loop
