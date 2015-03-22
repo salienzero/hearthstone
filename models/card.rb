@@ -23,10 +23,10 @@ class Card
     else
       puts "Casting #{@name}:"
       turn.mana_pool = turn.mana_pool - @cost
-      run_damage(opponent) if @damage > 0
-      run_heal(player) if @heal > 0
-      run_draw(player) if @draw > 0
-      run_mana(turn) if @mana > 0
+      run_damage(opponent) unless @damage.zero?
+      run_heal(player) unless @heal.zero?
+      run_draw(player) unless @draw.zero?
+      run_mana(turn) unless @mana.zero?
       run_message unless @message.nil?
       return true
     end

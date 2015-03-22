@@ -12,7 +12,7 @@ class Turn
 
   def run_loop
     turn_ended = false
-    while !game_over? && !turn_ended
+    while !@game.game_over? && !turn_ended
       display_game_status
       player_action = gets.chomp.to_i
       if player_action.zero?
@@ -38,9 +38,5 @@ class Turn
       puts "#{index + 1}: #{card}"
     end
     puts "Hit enter with no number to end your turn"
-  end
-
-  def game_over?
-    !@player.alive? || !@opponent.alive?
   end
 end
