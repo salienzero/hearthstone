@@ -1,9 +1,16 @@
 require 'spec_helper'
 
 describe Card do
+  context "#to_s" do
+    it "includes card name and cost" do
+      card = described_class.new("name" => "foocard", "cost" => 3)
+      expect(card.to_s).to include(card.name).and include(card.cost.to_s)
+    end
+  end
+
   context "#cast" do
     before(:each) do
-      @card = Card.new("cost" => 3, "damage" => 5)
+      @card = described_class.new("cost" => 3, "damage" => 5)
       @player = double(Player, name: "foo")
       @opponent = double(Player, name: "bar")
     end
@@ -41,7 +48,7 @@ describe Card do
 
   context "#run_damage" do
     it "reduces opponent HP by the correct amount" do
-      card = Card.new("damage" => 5)
+      card = described_class.new("damage" => 5)
       opponent = double(Player, name: "foo", hp: 4)
       expect(opponent).to receive(:hp=).with(-1)
       card.run_damage(opponent)
@@ -50,7 +57,7 @@ describe Card do
 
   context "#run_heal" do
     it "increases player HP by the correct amount" do
-      card = Card.new("heal" => 3)
+      card = described_class.new("heal" => 3)
       player = double(Player, name: "foo", hp: 24)
       expect(player).to receive(:hp=).with(27)
       card.run_heal(player)
@@ -59,7 +66,7 @@ describe Card do
 
   context "#run_draw" do
     it "calls #draw on the player with the correct params" do
-      card = Card.new("draw" => 4)
+      card = described_class.new("draw" => 4)
       player = double(Player, name: "foo")
       expect(player).to receive(:draw).with(4, false)
       card.run_draw(player)
@@ -68,7 +75,7 @@ describe Card do
 
   context "#run_mana" do
     it "increases mana pool by the correct amount" do
-      card = Card.new("mana" => 2)
+      card = described_class.new("mana" => 2)
       turn = double(Turn, mana_pool: 3)
       expect(turn).to receive(:mana_pool=).with(5)
       card.run_mana(turn)
@@ -77,7 +84,7 @@ describe Card do
 
   context "#run_message" do
     it "displays the correct message" do
-      card = Card.new("message" => "hello world")
+      card = described_class.new("message" => "hello world")
       expect{card.run_message}.to output(card.message + "\n").to_stdout
     end
   end
