@@ -1,4 +1,5 @@
 class Turn
+  INPUT_OUT_OF_RANGE_MESSAGE = "Please enter the number of a card in your hand, or no number to end your turn"
   attr_accessor :game, :player, :opponent, :mana_pool
 
   def initialize(game, player, opponent)
@@ -6,7 +7,7 @@ class Turn
     @player = player
     @opponent = opponent
 
-    @mana_pool = [game.starting_mana + (@game.turn_number - 1) * game.mana_per_turn, game.max_mana].min
+    @mana_pool = [game.starting_mana + (game.turn_number - 1) * game.mana_per_turn, game.max_mana].min
     @player.draw
   end
 
@@ -18,7 +19,7 @@ class Turn
       if player_action.zero?
         turn_ended = true
       elsif player_action > @player.hand.size
-        puts "Please enter the number of a card in your hand, or no number to end your turn"
+        puts INPUT_OUT_OF_RANGE_MESSAGE
       else
         if @player.hand[player_action - 1].cast(@player, @opponent, self)
           @player.hand.delete_at(player_action - 1)
