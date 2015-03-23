@@ -15,6 +15,9 @@ Bundler.require(:test)
 model_path = File.join(File.dirname(__FILE__), "..", "models", "**", "*.rb")
 Dir.glob(model_path).each { |f| require f }
 
+require "yaml"
+CARDS = YAML.load_file(File.join(File.dirname(__FILE__), "..", "config", "cards.yml"))
+
 RSpec.configure do |config|
   config.color = true
   config.tty = true

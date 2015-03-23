@@ -20,19 +20,19 @@ describe Card do
       end
 
       it "returns true" do
-        @card.stub(:run_damage)
-        @turn.stub(:mana_pool=)
+        allow(@card).to receive(:run_damage)
+        allow(@turn).to receive(:mana_pool=)
         expect(@card.cast(@player, @opponent, @turn)).to eq(true)
       end
 
       it "reduces the turn's mana pool by the correct amount" do
-        @card.stub(:run_damage)
+        allow(@card).to receive(:run_damage)
         expect(@turn).to receive(:mana_pool=).with(1)
         @card.cast(@player, @opponent, @turn)
       end
 
       it "calls the appropriate routines" do
-        @turn.stub(:mana_pool=)
+        allow(@turn).to receive(:mana_pool=)
         expect(@card).to receive(:run_damage)
         @card.cast(@player, @opponent, @turn)
       end
